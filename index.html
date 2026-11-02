@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kilimall Kenya - Online Shopping Mall</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: { sans: ['Inter', 'sans-serif'] },
+    colors: { brand: { red: '#e61e2b', darkRed: '#cc111e', lightBg: '#f5f5f7', orange: '#ff6b00', green: '#25d366' } }
+  } }
+}
+</script>
+<style>
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+@keyframes pulse-fast { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.animate-pulse-fast { animation: pulse-fast 1s infinite; }
+</style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col justify-between select-none pb-16">
+
+<header id="mainHeader" class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
+  <div class="px-3 pt-3 pb-2 flex items-center gap-2">
+    <div class="relative flex-1 flex items-center border-2 border-brand-red rounded-lg overflow-hidden h-10 bg-white">
+      <input type="text" id="searchInput" placeholder="I am searching for..." class="w-full px-3 text-sm text-gray-700 focus:outline-none placeholder-gray-400" oninput="handleSearch(this.value)">
+      <button onclick="triggerSearch()" class="bg-brand-red text-white h-full px-4 flex items-center justify-center hover:bg-brand-darkRed transition-colors">
+        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+      </button>
+    </div>
+  </div>
+  <div id="topCategoryNav" class="px-2 overflow-x-auto no-scrollbar flex items-center border-t border-gray-50 text-sm font-medium text-gray-600 space-x-6 whitespace-nowrap">
+    <button onclick="filterCategory('ALL')" class="category-nav-btn py-2.5 px-1 border-b-2 border-brand-red text-brand-red font-bold transition-all" data-cat="ALL">ALL</button>
+    <button onclick="filterCategory('TVs')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="TVs">TVs</button>
+    <button onclick="filterCategory('Appliances')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Appliances">Appliances</button>
+    <button onclick="filterCategory('Kitchen')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Kitchen">Kitchen</button>
+    <button onclick="filterCategory('Home')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Home">Home</button>
+    <button onclick="filterCategory('Phones')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Phones">Phones</button>
+    <button onclick="filterCategory('Fashion')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Fashion">Fashion</button>
+    <button onclick="filterCategory('Beauty')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Beauty">Beauty</button>
+    <button onclick="filterCategory('Shoes')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Shoes">Shoes</button>
+  </div>
+</header>
+
+<main class="max-w-lg mx-auto w-full flex-1 space-y-3 pb-6">
+
+  <!-- HOME -->
+  <div id="view-home" class="space-y-3">
+    <div class="p-2">
+      <div class="relative w-full h-44 rounded-2xl overflow-hidden shadow-sm bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+        <div id="carouselSlides" class="relative w-full h-full flex transition-transform duration-500 ease-out">
+          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-slate-100 to-slate-200 text-gray-900">
+            <div class="z-10 max-w-[55%]">
+              <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">New Arrival</span>
+              <h2 class="text-xl font-extrabold mt-1 tracking-tight">WATCH <span class="text-xs font-normal block text-gray-500">SERIES 12</span></h2>
+              <p class="text-[11px] text-gray-600 mt-0.5 line-clamp-1">Your Watch, Now with Intelligence</p>
+              <button onclick="openProductDetailById(201)" class="mt-3 px-3 py-1 border border-black rounded-full text-xs font-bold hover:bg-black hover:text-white transition-all shadow-sm">Live Sale</button>
+            </div>
+            <div class="relative w-36 h-36 flex items-center justify-center">
+              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&auto=format&fit=crop&q=80" alt="Watch Series 12" class="object-contain h-32 drop-shadow-lg">
+            </div>
+          </div>
+          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-red-600 to-amber-500 text-white">
+            <div class="z-10 max-w-[55%]">
+              <span class="bg-yellow-300 text-red-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Super Deal</span>
+              <h2 class="text-xl font-extrabold mt-1">SMART TV 43"</h2>
+              <p class="text-xs text-red-100 mt-0.5">Full HD Android Display</p>
+              <button onclick="openProductDetailById(102)" class="mt-3 px-3 py-1 bg-white text-red-600 rounded-full text-xs font-bold shadow-md hover:bg-gray-100 transition-all">Shop KSh 21,999</button>
+            </div>
+            <div class="relative w-36 h-36 flex items-center justify-center">
+              <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400&auto=format&fit=crop&q=80" alt="Smart TV" class="object-contain h-32 drop-shadow-lg rounded-lg">
+            </div>
+          </div>
+          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-blue-600 to-indigo-800 text-white">
+            <div class="z-10 max-w-[55%]">
+              <span class="bg-blue-300 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Kitchen Fiesta</span>
+              <h2 class="text-xl font-extrabold mt-1">Air Fryer 6L</h2>
+              <p class="text-xs text-blue-100 mt-0.5">Healthy Cooking Made Easy</p>
+              <button onclick="openProductDetailById(103)" class="mt-3 px-3 py-1 bg-white text-blue-700 rounded-full text-xs font-bold shadow-md hover:bg-gray-100 transition-all">Claim Voucher</button>
+            </div>
+            <div class="relative w-36 h-36 flex items-center justify-center">
+              <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=400&auto=format&fit=crop&q=80" alt="Air Fryer" class="object-contain h-32 drop-shadow-lg rounded-lg">
+            </div>
+          </div>
+        </div>
+        <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-20">
+          <button onclick="setCarouselSlide(0)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-100 transition-opacity"></button>
+          <button onclick="setCarouselSlide(1)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-40 transition-opacity"></button>
+          <button onclick="setCarouselSlide(2)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-40 transition-opacity"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-2">
+      <div class="bg-white rounded-2xl p-3 shadow-sm grid grid-cols-5 gap-y-4 gap-x-1 text-center text-xs">
+        <button onclick="openAlertModal('🎁 New User Voucher! KSh 1,329 voucher added to your account!')" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-red-500 to-pink-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-gift text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">KSh 1329 for New User</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('Phones');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-400 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-mobile-screen-button text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Phones</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('Kitchen');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-kitchen-set text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Kitchen</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('Appliances');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-500 to-indigo-400 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-blender text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Appliances</span>
+        </button>
+        <button onclick="openAlertModal('🎡 Lucky Spin! You won 100 KiliCoins + KSh 300 Shopping Coupon!')" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-400 to-red-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform relative overflow-hidden">
+            <i class="fa-solid fa-dharmachakra text-xl animate-spin" style="animation-duration: 8s;"></i>
+            <span class="absolute top-0 right-0 bg-yellow-300 text-red-800 text-[8px] font-extrabold px-1 rounded-bl">Free</span>
+          </div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">WIN KSh 130K</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('TVs');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-tv text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">TVs</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('Beauty');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-pink-400 to-rose-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-pump-soap text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Health & Beauty</span>
+        </button>
+        <button onclick="switchTab('categories'); selectCategoryTab('Shoes');" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-orange-400 to-amber-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-shoe-prints text-xl"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Shoes</span>
+        </button>
+        <button onclick="claimDailyCheckIn()" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-300 to-yellow-500 text-yellow-950 flex items-center justify-center shadow-md group-active:scale-95 transition-transform font-bold text-lg"><i class="fa-solid fa-coins"></i></div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Check-in</span>
+        </button>
+        <button onclick="openAlertModal('💰 Pay 1 Bob Deal: Enter your M-Pesa phone number at checkout to receive 5 Bob cash return!')" class="flex flex-col items-center gap-1.5 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-600 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform relative">
+            <i class="fa-solid fa-hand-holding-dollar text-xl"></i>
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] font-bold px-1 rounded-full">10% OFF</span>
+          </div>
+          <span class="text-[11px] font-medium leading-tight text-gray-700">Pay 1 Bob</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="px-2">
+      <div class="bg-white rounded-2xl p-3 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xl font-extrabold italic tracking-tight text-gray-900 flex items-center">F<i class="fa-solid fa-bolt text-brand-red animate-pulse-fast mx-0.5"></i>ash Sale</h2>
+          <div class="flex items-center gap-1 text-xs font-bold">
+            <span class="text-gray-500 font-normal mr-1">Ends in</span>
+            <span id="timerHours" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">01</span><span>:</span>
+            <span id="timerMinutes" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">23</span><span>:</span>
+            <span id="timerSeconds" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">45</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-2 overflow-x-auto no-scrollbar">
+          <div onclick="openProductDetailById(202)" class="cursor-pointer group">
+            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300&auto=format&fit=crop&q=80" alt="Flash Item 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform"></div>
+            <div class="text-brand-red font-extrabold text-sm text-center">KSh 99</div>
+            <div class="text-[10px] text-gray-400 line-through text-center">KSh 1,200</div>
+          </div>
+          <div onclick="openProductDetailById(203)" class="cursor-pointer group">
+            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=300&auto=format&fit=crop&q=80" alt="Flash Item 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform"></div>
+            <div class="text-brand-red font-extrabold text-sm text-center">KSh 99</div>
+            <div class="text-[10px] text-gray-400 line-through text-center">KSh 850</div>
+          </div>
+          <div onclick="openProductDetailById(201)" class="cursor-pointer group">
+            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5">
+              <span class="absolute top-1 left-1 bg-brand-red text-white text-[8px] font-bold px-1 rounded z-10">JQSEN</span>
+              <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=300&auto=format&fit=crop&q=80" alt="Flash Item 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+            </div>
+            <div class="text-brand-red font-extrabold text-sm text-center">KSh 1,849</div>
+            <div class="text-[10px] text-gray-400 line-through text-center">KSh 4,500</div>
+          </div>
+          <div onclick="openProductDetailById(106)" class="cursor-pointer group">
+            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5">
+              <span class="absolute bottom-1 left-0 right-0 bg-black/70 text-white text-[8px] text-center font-bold py-0.5 z-10">MAYBELLINE</span>
+              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300&auto=format&fit=crop&q=80" alt="Flash Item 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+            </div>
+            <div class="text-brand-red font-extrabold text-sm text-center">KSh 2,179</div>
+            <div class="text-[10px] text-gray-400 line-through text-center">KSh 3,200</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-2 pt-1">
+      <div class="flex items-center justify-between mb-2.5 px-1">
+        <h3 class="text-lg font-bold text-gray-900">What's New</h3>
+        <span id="activeFilterBadge" class="text-xs bg-red-100 text-brand-red font-semibold px-2 py-0.5 rounded-full">Showing: All Items</span>
+      </div>
+      <div id="productGrid" class="grid grid-cols-2 gap-2"></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div id="view-categories" class="hidden px-2 py-3 space-y-3">
+    <div class="bg-white rounded-2xl p-3 shadow-sm">
+      <h2 class="text-base font-bold text-gray-900 pb-2 border-b border-gray-100 flex items-center justify-between">
+        <span class="flex items-center gap-2"><i class="fa-solid fa-layer-group text-brand-red"></i> Browse Categories</span>
+        <span class="text-xs text-gray-400 font-normal">Select category</span>
+      </h2>
+      <div class="flex gap-2 mt-3 min-h-[450px]">
+        <div id="categorySidebar" class="w-28 flex flex-col gap-1 border-r border-gray-100 pr-2 text-xs font-medium text-gray-600"></div>
+        <div class="flex-1 pl-1">
+          <div id="categoryHeaderTitle" class="text-xs font-bold text-gray-800 mb-2 uppercase tracking-wider bg-gray-50 p-2 rounded-lg">Category Items</div>
+          <div id="categoryProductsGrid" class="grid grid-cols-2 gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div id="view-message" class="hidden px-2 py-3 space-y-3">
+    <div class="bg-white rounded-2xl p-4 shadow-sm">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <h2 class="text-base font-bold text-gray-900 flex items-center gap-2"><i class="fa-regular fa-comment-dots text-brand-red text-xl"></i> Messages & Support</h2>
+        <span class="text-xs bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded-full">2 Active</span>
+      </div>
+      <div class="space-y-3 mt-3">
+        <div onclick="openChatRoom('Kilimall Official Support')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl hover:bg-red-50/50 cursor-pointer transition-colors border border-gray-100">
+          <div class="w-12 h-12 rounded-2xl bg-brand-red text-white flex items-center justify-center font-bold text-xl shadow-md relative">
+            <i class="fa-solid fa-headset"></i>
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between items-center"><h4 class="text-xs font-bold text-gray-900">Kilimall Customer Support</h4><span class="text-[10px] text-gray-400">10:42 AM</span></div>
+            <p class="text-xs text-gray-600 line-clamp-1 mt-1">Hello! How can we assist you with your order delivery?</p>
+          </div>
+        </div>
+        <div onclick="openChatRoom('Flash Deals & Promos')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl hover:bg-amber-50/50 cursor-pointer transition-colors border border-gray-100">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center font-bold text-xl shadow-md"><i class="fa-solid fa-bolt"></i></div>
+          <div class="flex-1">
+            <div class="flex justify-between items-center"><h4 class="text-xs font-bold text-gray-900">Flash Deals Bot</h4><span class="text-[10px] text-gray-400">Yesterday</span></div>
+            <p class="text-xs text-gray-600 line-clamp-1 mt-1">Your KSh 99 Flash Sale voucher has been credited!</p>
+          </div>
+        </div>
+        <div onclick="openChatRoom('Delivery & Logistics Center')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl hover:bg-blue-50/50 cursor-pointer transition-colors border border-gray-100">
+          <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-md"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="flex-1">
+            <div class="flex justify-between items-center"><h4 class="text-xs font-bold text-gray-900">Fargo Courier Tracker</h4><span class="text-[10px] text-gray-400">2 days ago</span></div>
+            <p class="text-xs text-gray-600 line-clamp-1 mt-1">Your package #KM-8820 is out for delivery to Nairobi CBD station.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div id="view-cart" class="hidden px-2 py-3 space-y-3">
+    <div class="bg-white rounded-2xl p-4 shadow-sm">
+      <div class="flex items-center justify-between border-b pb-3 border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-brand-red"></i> Shopping Cart (<span id="cartCountHeader">0</span>)</h2>
+        <button onclick="clearCart()" class="text-xs text-gray-400 hover:text-brand-red flex items-center gap-1"><i class="fa-regular fa-trash-can"></i> Clear All</button>
+      </div>
+      <div id="cartPageList" class="divide-y divide-gray-100 my-2 min-h-[220px]"></div>
+      <div class="bg-gray-50 p-3 rounded-2xl space-y-2 text-xs border border-gray-100 mt-4">
+        <div class="flex justify-between text-gray-600"><span>Items Subtotal:</span><span id="cartSubtotal" class="font-semibold text-gray-800">KSh 0</span></div>
+        <div class="flex justify-between text-gray-600"><span>Standard Shipping Fee:</span><span class="font-semibold text-gray-800">KSh 150</span></div>
+        <div class="flex justify-between text-gray-600"><span>Voucher Discount:</span><span id="cartDiscount" class="font-semibold text-green-600">- KSh 0</span></div>
+        <div class="border-t border-gray-200 pt-2 flex justify-between items-center text-sm">
+          <span class="font-bold text-gray-900">Estimated Total:</span>
+          <span id="cartGrandTotal" class="text-lg font-extrabold text-brand-red">KSh 0</span>
+        </div>
+      </div>
+      <div class="mt-4 space-y-3">
+        <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl p-2.5">
+          <i class="fa-solid fa-mobile-screen text-emerald-600 text-lg"></i>
+          <input type="tel" id="checkoutMpesaPhone" placeholder="Enter M-Pesa Phone (0712345678)" class="w-full text-xs bg-transparent focus:outline-none text-emerald-950 font-semibold placeholder-emerald-400">
+        </div>
+        <button onclick="processCheckoutOrder()" class="w-full bg-brand-red text-white py-3 rounded-2xl font-bold text-sm hover:bg-brand-darkRed shadow-lg shadow-red-200 flex items-center justify-center gap-2 active:scale-95 transition-transform">
+          <i class="fa-solid fa-lock"></i> Pay with M-Pesa
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT -->
+  <div id="view-account" class="hidden px-2 py-3 space-y-3">
+    <div class="bg-gradient-to-r from-brand-red via-red-600 to-orange-500 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
+      <div class="flex items-center gap-4 relative z-10">
+        <div class="w-16 h-16 rounded-full bg-white text-brand-red font-black text-2xl flex items-center justify-center shadow-lg border-2 border-amber-300">JD</div>
+        <div>
+          <h2 class="text-lg font-bold flex items-center gap-2">John Doe <span class="bg-yellow-300 text-yellow-950 text-[10px] px-2 py-0.5 rounded-full font-extrabold shadow-sm">VIP Gold</span></h2>
+          <p class="text-xs text-red-100 mt-0.5">+254 712 *** 345</p>
+          <div class="flex items-center gap-2 mt-2 text-xs">
+            <span class="bg-black/20 backdrop-blur px-2.5 py-1 rounded-lg">KiliCoins: <b id="accountCoins">350</b></span>
+            <span class="bg-black/20 backdrop-blur px-2.5 py-1 rounded-lg">Balance: <b>KSh 1,250</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-4 shadow-sm space-y-3">
+      <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+        <h3 class="text-xs font-bold text-gray-900 uppercase tracking-wider">My Orders</h3>
+        <button onclick="openAlertModal('📦 Order History: Showing all 8 past orders from Kilimall.')" class="text-xs text-brand-red font-semibold hover:underline">View All ></button>
+      </div>
+      <div class="grid grid-cols-4 text-center text-xs">
+        <button onclick="openAlertModal('💳 Pending Payment: 0 orders.')" class="flex flex-col items-center gap-1.5 text-gray-600 hover:text-brand-red transition-colors"><i class="fa-solid fa-wallet text-xl text-gray-700"></i><span>To Pay</span></button>
+        <button onclick="openAlertModal('📦 Orders To Ship: 1 item being packed at warehouse.')" class="flex flex-col items-center gap-1.5 text-gray-600 hover:text-brand-red transition-colors relative"><i class="fa-solid fa-box text-xl text-gray-700"></i><span class="absolute -top-1 right-2 bg-brand-red text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">1</span><span>To Ship</span></button>
+        <button onclick="openAlertModal('🚚 In Transit: 2 orders out with Fargo Courier.')" class="flex flex-col items-center gap-1.5 text-gray-600 hover:text-brand-red transition-colors relative"><i class="fa-solid fa-truck-fast text-xl text-gray-700"></i><span class="absolute -top-1 right-2 bg-brand-red text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span><span>To Receive</span></button>
+        <button onclick="openAlertModal('⭐ Pending Reviews: 3 products waiting for your feedback.')" class="flex flex-col items-center gap-1.5 text-gray-600 hover:text-brand-red transition-colors"><i class="fa-solid fa-star-half-stroke text-xl text-gray-700"></i><span>Reviews</span></button>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-4 shadow-sm space-y-3">
+      <h3 class="text-xs font-bold text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2">My Assets & Services</h3>
+      <div class="grid grid-cols-3 gap-3 text-center text-xs">
+        <button onclick="openAlertModal('🎟️ Vouchers: You have 3 active coupons worth KSh 1,500!')" class="p-2.5 bg-gray-50 rounded-xl hover:bg-red-50 flex flex-col items-center gap-1"><i class="fa-solid fa-ticket text-brand-red text-lg"></i><span class="font-medium text-gray-800">3 Vouchers</span></button>
+        <button onclick="openAlertModal('📍 Saved Pick-Up Station: CBD Kimathi Street Agent')" class="p-2.5 bg-gray-50 rounded-xl hover:bg-red-50 flex flex-col items-center gap-1"><i class="fa-solid fa-location-dot text-brand-red text-lg"></i><span class="font-medium text-gray-800">Pick-up Hub</span></button>
+        <button onclick="openAlertModal('❤️ Wishlist: 5 items saved for later')" class="p-2.5 bg-gray-50 rounded-xl hover:bg-red-50 flex flex-col items-center gap-1"><i class="fa-solid fa-heart text-brand-red text-lg"></i><span class="font-medium text-gray-800">Saved Items</span></button>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl p-2 shadow-sm space-y-1">
+      <button onclick="openAlertModal('🏠 Delivery Address: House #14, Kilimani, Nairobi, Kenya')" class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl text-xs font-medium text-gray-700"><span class="flex items-center gap-3"><i class="fa-solid fa-map-location-dot text-brand-red text-base w-5"></i> Address Book</span><i class="fa-solid fa-chevron-right text-gray-400"></i></button>
+      <button onclick="switchTab('message'); openChatRoom('Kilimall Official Support');" class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl text-xs font-medium text-gray-700"><span class="flex items-center gap-3"><i class="fa-solid fa-headset text-brand-red text-base w-5"></i> Customer Support Center</span><i class="fa-solid fa-chevron-right text-gray-400"></i></button>
+      <button onclick="openAlertModal('🔒 Security & Login: Password and M-Pesa PIN protection enabled.')" class="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-xl text-xs font-medium text-gray-700"><span class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-brand-red text-base w-5"></i> Account Security</span><i class="fa-solid fa-chevron-right text-gray-400"></i></button>
+    </div>
+  </div>
+</main>
+
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 max-w-lg mx-auto shadow-lg">
+  <div class="grid grid-cols-5 h-14 text-center">
+    <button onclick="switchTab('home')" id="nav-home" class="nav-item flex flex-col items-center justify-center text-brand-red font-medium"><i class="fa-solid fa-house text-lg"></i><span class="text-[10px] mt-0.5">Home</span></button>
+    <button onclick="switchTab('categories')" id="nav-categories" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red"><i class="fa-solid fa-list text-lg"></i><span class="text-[10px] mt-0.5">Categories</span></button>
+    <button onclick="switchTab('message')" id="nav-message" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red relative">
+      <div class="relative"><i class="fa-regular fa-comment-dots text-lg"></i><span class="absolute -top-1 -right-2 bg-brand-red text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span></div>
+      <span class="text-[10px] mt-0.5">Message</span>
+    </button>
+    <button onclick="switchTab('cart')" id="nav-cart" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red relative">
+      <div class="relative"><i class="fa-solid fa-cart-shopping text-lg"></i><span id="cartBadge" class="hidden absolute -top-1.5 -right-2 bg-brand-red text-white text-[10px] w-4 h-4 rounded-full items-center justify-center font-bold">0</span></div>
+      <span class="text-[10px] mt-0.5">Cart</span>
+    </button>
+    <button onclick="switchTab('account')" id="nav-account" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-gray-900"><i class="fa-regular fa-user text-lg"></i><span class="text-[10px] mt-0.5">Account</span></button>
+  </div>
+</nav>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div id="productDetailModal" class="fixed inset-0 bg-black/70 z-50 hidden flex justify-end flex-col backdrop-blur-sm transition-opacity">
+  <div class="bg-white rounded-t-3xl max-w-lg w-full mx-auto p-4 max-h-[90vh] flex flex-col overflow-y-auto no-scrollbar relative">
+    <div class="flex items-center justify-between pb-2 border-b border-gray-100 sticky top-0 bg-white z-10 pt-1">
+      <span id="detailCategoryBadge" class="text-[11px] bg-red-100 text-brand-red px-2.5 py-0.5 rounded-full font-bold">Category</span>
+      <button onclick="closeProductDetailModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200"><i class="fa-solid fa-xmark text-lg"></i></button>
+    </div>
+    <div class="space-y-2 my-3">
+      <div class="relative w-full h-64 bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
+        <img id="detailProductImage" src="" alt="Product Image" class="w-full h-full object-contain p-2 transition-all duration-300">
+        <span id="detailDiscountBadge" class="absolute top-2 left-2 bg-brand-red text-white text-xs font-black px-2 py-1 rounded-lg">30% OFF</span>
+      </div>
+      <div id="detailImageThumbnails" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1"></div>
+    </div>
+    <div class="space-y-2">
+      <h2 id="detailProductTitle" class="text-base font-bold text-gray-900 leading-snug">Product Title Here</h2>
+      <div class="flex items-baseline gap-2">
+        <span id="detailProductPrice" class="text-2xl font-extrabold text-brand-red">KSh 0</span>
+        <span id="detailProductOldPrice" class="text-xs text-gray-400 line-through">KSh 0</span>
+      </div>
+      <div class="flex items-center gap-2 text-xs border-y border-gray-100 py-2">
+        <div class="flex items-center text-amber-500 font-bold gap-1"><i class="fa-solid fa-star"></i><span id="detailProductRating">4.8</span></div>
+        <span class="text-gray-300">|</span>
+        <span id="detailProductReviews" class="text-gray-500">120 Verified Reviews</span>
+        <span class="text-gray-300">|</span>
+        <span class="text-green-600 font-semibold flex items-center gap-1"><i class="fa-solid fa-shield-halved"></i> Kilimall Express</span>
+      </div>
+      <div class="space-y-1 pt-2">
+        <h4 class="text-xs font-bold text-gray-900">Key Features & Description:</h4>
+        <p id="detailProductDescription" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">Detailed specs.</p>
+      </div>
+      <div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-3">
+        <span class="text-xs font-bold text-gray-800">Quantity:</span>
+        <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden">
+          <button onclick="adjustDetailQty(-1)" class="px-3 py-1 bg-gray-100 text-gray-700 font-bold hover:bg-gray-200">-</button>
+          <span id="detailQtyDisplay" class="px-4 text-xs font-bold">1</span>
+          <button onclick="adjustDetailQty(1)" class="px-3 py-1 bg-gray-100 text-gray-700 font-bold hover:bg-gray-200">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-3 mt-6 pt-3 border-t border-gray-100 sticky bottom-0 bg-white">
+      <button onclick="addCurrentDetailToCart()" class="bg-amber-500 text-white py-3 rounded-2xl font-bold text-xs hover:bg-amber-600 transition-colors shadow-md">Add to Cart</button>
+      <button onclick="buyCurrentDetailNow()" class="bg-brand-red text-white py-3 rounded-2xl font-bold text-xs hover:bg-brand-darkRed transition-colors shadow-md">Buy Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT MODAL -->
+<div id="chatModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-3 backdrop-blur-sm">
+  <div class="bg-white rounded-2xl max-w-sm w-full h-[80vh] flex flex-col shadow-2xl overflow-hidden">
+    <div class="bg-brand-red text-white p-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-headset text-lg"></i>
+        <div>
+          <h4 id="chatRoomTitle" class="text-xs font-bold">Customer Support</h4>
+          <span class="text-[10px] text-red-100 flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full"></span> Online</span>
+        </div>
+      </div>
+      <button onclick="closeChatRoom()" class="text-white hover:text-gray-200 w-7 h-7 flex items-center justify-center rounded-full bg-black/20"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="chatMessagesBox" class="flex-1 p-3 overflow-y-auto space-y-3 bg-gray-50 text-xs">
+      <div class="flex items-start gap-2">
+        <div class="w-7 h-7 rounded-full bg-brand-red text-white flex items-center justify-center text-[10px] font-bold">CS</div>
+        <div class="bg-white p-2.5 rounded-2xl rounded-tl-none shadow-sm max-w-[80%] text-gray-700">Jambo! Welcome to Kilimall Support. How can we help you today?</div>
+      </div>
+    </div>
+    <div class="p-3 bg-white border-t flex items-center gap-2">
+      <input type="text" id="chatInputText" placeholder="Type your message..." class="flex-1 bg-gray-100 px-3 py-2 rounded-xl text-xs focus:outline-none">
+      <button onclick="sendChatMessage()" class="bg-brand-red text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-brand-darkRed transition-colors">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- ALERT MODAL -->
+<div id="generalModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl max-w-xs w-full p-5 text-center space-y-4 shadow-xl">
+    <div class="w-12 h-12 bg-red-100 text-brand-red rounded-full flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-circle-check"></i></div>
+    <p id="modalMessageText" class="text-sm font-medium text-gray-800 leading-snug">Notice message here.</p>
+    <button onclick="closeAlertModal()" class="w-full bg-brand-red text-white py-2.5 rounded-xl font-bold text-sm hover:bg-brand-darkRed transition-colors">Okay</button>
+  </div>
+</div>
+
+<script>
+const LIPWA_LINK = 'https://lipwa.link/10371';
+
+const productsDatabase = [
+  { id: 101, name: "Ultra-Light Sneakers Breathable Running Shoes", category: "Shoes", price: 1450, oldPrice: 2800, rating: 4.8, reviews: 124,
+    images: [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "Lightweight, breathable mesh sports shoes designed for maximum comfort, outdoor sports, running, and everyday casual wear." },
+  { id: 102, name: "43 inch Smart Android Full HD TV", category: "TVs", price: 21999, oldPrice: 32000, rating: 4.9, reviews: 310,
+    images: [
+      "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1571415060716-baff5f7179e6?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "Crystal clear Full HD display with built-in Wi-Fi, Netflix, YouTube, casting support, and multiple HDMI/USB ports." },
+  { id: 103, name: "Digital Air Fryer 6L Large Capacity", category: "Kitchen", price: 5499, oldPrice: 8500, rating: 4.8, reviews: 189,
+    images: [
+      "https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "Oil-free healthy cooking with digital touch panel, rapid 360-degree hot air circulation, non-stick basket, and auto shutdown." },
+  { id: 104, name: "Electric Speed Blender & Commercial Grinder Set", category: "Kitchen", price: 2499, oldPrice: 4200, rating: 4.7, reviews: 89,
+    images: [
+      "https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "High-speed stainless steel blades ideal for smoothies, nuts, coffee beans, and spice grinding with variable pulse control." },
+  { id: 105, name: "4G Dual SIM Smartphone 128GB Storage", category: "Phones", price: 11499, oldPrice: 16000, rating: 4.6, reviews: 450,
+    images: [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1574944985070-8f30c4397e3c?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "Long-lasting 5000mAh battery, 50MP triple AI camera system, fast fingerprint sensor, and vibrant 90Hz HD+ notch screen." },
+  { id: 106, name: "Maybelline Makeup Essentials Set", category: "Beauty", price: 2179, oldPrice: 3200, rating: 4.7, reviews: 96,
+    images: ["https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80"],
+    description: "Long-wear makeup essentials set with foundation, lip colour and mascara for a complete everyday look." },
+  { id: 201, name: "JQSEN Smart Watch Series 12", category: "Fashion", price: 1849, oldPrice: 4500, rating: 4.7, reviews: 142,
+    images: [
+      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=600&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&auto=format&fit=crop&q=80"
+    ],
+    description: "Bluetooth calling smart watch with heart-rate and sleep tracking, AMOLED display, and multi-day battery life." },
+  { id: 202, name: "Classic Analog Wrist Watch (Flash Deal)", category: "Fashion", price: 99, oldPrice: 1200, rating: 4.3, reviews: 58,
+    images: ["https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=80"],
+    description: "Stylish analog wrist watch with stainless steel case and water-resistant build. Limited flash-sale stock." },
+  { id: 203, name: "Wireless Bluetooth Headphones (Flash Deal)", category: "Phones", price: 99, oldPrice: 850, rating: 4.4, reviews: 77,
+    images: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&auto=format&fit=crop&q=80"],
+    description: "Wireless Bluetooth headphones with deep bass and long battery life. Limited flash-sale stock." }
+];
+
+let shoppingCart = [];
+let activeCategory = 'ALL';
+let currentCarouselIndex = 0;
+let activeDetailProduct = null;
+let detailQty = 1;
+let userKiliCoins = 350;
+
+window.onload = function() {
+  renderProducts(productsDatabase);
+  populateCategorySidebar();
+  startCarouselTimer();
+  startFlashSaleTimer();
+  updateCartUI();
+  handlePaymentReturn();
+};
+
+function setCarouselSlide(index) {
+  currentCarouselIndex = index;
+  document.getElementById('carouselSlides').style.transform = `translateX(-${index * 100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((dot, idx) => { dot.style.opacity = idx === index ? '1' : '0.4'; });
+}
+
+function startCarouselTimer() {
+  setInterval(() => {
+    currentCarouselIndex = (currentCarouselIndex + 1) % 3;
+    setCarouselSlide(currentCarouselIndex);
+  }, 4000);
+}
+
+function startFlashSaleTimer() {
+  let totalSeconds = 1 * 3600 + 23 * 60 + 45;
+  setInterval(() => {
+    if (totalSeconds <= 0) totalSeconds = 24 * 3600;
+    totalSeconds--;
+    document.getElementById('timerHours').innerText = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    document.getElementById('timerMinutes').innerText = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    document.getElementById('timerSeconds').innerText = String(totalSeconds % 60).padStart(2, '0');
+  }, 1000);
+}
+
+function switchTab(tabName) {
+  ['home', 'categories', 'message', 'cart', 'account'].forEach(v => {
+    const el = document.getElementById(`view-${v}`);
+    if (el) el.classList.add('hidden');
+    const navBtn = document.getElementById(`nav-${v}`);
+    if (navBtn) navBtn.className = "nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red relative";
+  });
+  const targetView = document.getElementById(`view-${tabName}`);
+  if (targetView) targetView.classList.remove('hidden');
+  const activeNavBtn = document.getElementById(`nav-${tabName}`);
+  if (activeNavBtn) activeNavBtn.className = "nav-item flex flex-col items-center justify-center text-brand-red font-medium relative";
+
+  const header = document.getElementById('mainHeader');
+  if (tabName === 'account' || tabName === 'cart' || tabName === 'message') header.classList.add('hidden');
+  else header.classList.remove('hidden');
+
+  if (tabName === 'categories') selectCategoryTab('Phones');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterCategory(category) {
+  activeCategory = category;
+  document.querySelectorAll('.category-nav-btn').forEach(btn => {
+    btn.className = btn.getAttribute('data-cat') === category
+      ? 'category-nav-btn py-2.5 px-1 border-b-2 border-brand-red text-brand-red font-bold transition-all'
+      : 'category-nav-btn py-2.5 px-1 border-b-2 border-transparent text-gray-600 hover:text-brand-red transition-all';
+  });
+  document.getElementById('activeFilterBadge').innerText = category === 'ALL' ? 'Showing: All Items' : `Showing: ${category}`;
+  renderProducts(category === 'ALL' ? productsDatabase : productsDatabase.filter(p => p.category.toLowerCase() === category.toLowerCase()));
+}
+
+function handleSearch(query) {
+  const trimmed = query.trim().toLowerCase();
+  if (trimmed === '') { filterCategory(activeCategory); return; }
+  renderProducts(productsDatabase.filter(p =>
+    p.name.toLowerCase().includes(trimmed) || p.category.toLowerCase().includes(trimmed) || p.description.toLowerCase().includes(trimmed)));
+  document.getElementById('activeFilterBadge').innerText = `Search: "${query}"`;
+}
+
+function triggerSearch() { handleSearch(document.getElementById('searchInput').value); }
+
+function renderProducts(products) {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  if (products.length === 0) {
+    grid.innerHTML = '<div class="col-span-2 text-center py-10 text-gray-400 text-xs">No products found matching your query.</div>';
+    return;
+  }
+  products.forEach(item => {
+    const card = document.createElement('div');
+    card.className = "bg-white rounded-2xl p-2.5 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative border border-gray-50 cursor-pointer";
+    card.onclick = () => openProductDetail(item);
+    const coverImage = item.images && item.images.length > 0 ? item.images[0] : "https://placehold.co/300x300/f5f5f7/333?text=Item";
+    card.innerHTML = `
+      <div>
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-2">
+          <img src="${coverImage}" alt="${item.name}" class="w-full h-full object-cover">
+          <span class="absolute top-1.5 right-1.5 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold flex items-center gap-1"><i class="fa-solid fa-images text-[8px]"></i> ${item.images ? item.images.length : 1}</span>
+          <button onclick="event.stopPropagation(); addToCartById(${item.id})" class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform"><i class="fa-solid fa-plus text-xs"></i></button>
+        </div>
+        <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">${item.category}</span>
+        <h4 class="text-xs font-medium text-gray-800 mt-1 line-clamp-2 leading-snug">${item.name}</h4>
+      </div>
+      <div class="mt-2">
+        <div class="flex items-center gap-1 text-[10px] text-amber-500 mb-0.5"><i class="fa-solid fa-star"></i><span class="font-bold text-gray-700">${item.rating}</span><span class="text-gray-400">(${item.reviews})</span></div>
+        <div class="flex items-baseline gap-1"><span class="text-brand-red font-extrabold text-sm">KSh ${item.price.toLocaleString()}</span><span class="text-[10px] text-gray-400 line-through">KSh ${item.oldPrice.toLocaleString()}</span></div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function populateCategorySidebar() {
+  const sidebar = document.getElementById('categorySidebar');
+  sidebar.innerHTML = '';
+  ['Phones', 'TVs', 'Kitchen', 'Appliances', 'Fashion', 'Beauty', 'Shoes', 'Home'].forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = "category-side-btn p-2.5 rounded-xl text-left hover:bg-gray-50 text-gray-600 transition-all font-medium";
+    btn.innerText = cat;
+    btn.onclick = () => selectCategoryTab(cat);
+    sidebar.appendChild(btn);
+  });
+}
+
+function selectCategoryTab(catName) {
+  document.querySelectorAll('.category-side-btn').forEach(btn => {
+    btn.className = btn.innerText.toLowerCase() === catName.toLowerCase()
+      ? 'category-side-btn p-2.5 rounded-xl text-left bg-red-50 text-brand-red font-bold transition-all'
+      : 'category-side-btn p-2.5 rounded-xl text-left hover:bg-gray-50 text-gray-600 transition-all';
+  });
+  document.getElementById('categoryHeaderTitle').innerText = `${catName} COLLECTION`;
+  const filtered = productsDatabase.filter(p => p.category.toLowerCase() === catName.toLowerCase());
+  const grid = document.getElementById('categoryProductsGrid');
+  grid.innerHTML = '';
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="col-span-2 text-center py-8 text-gray-400 text-xs">No items in this category.</div>`;
+    return;
+  }
+  filtered.forEach(p => {
+    const coverImage = p.images && p.images.length > 0 ? p.images[0] : "https://placehold.co/300x300/f5f5f7/333?text=Item";
+    const card = document.createElement('div');
+    card.className = "bg-gray-50 p-2 rounded-xl flex flex-col justify-between cursor-pointer border border-gray-100 hover:shadow-sm";
+    card.onclick = () => openProductDetail(p);
+    card.innerHTML = `
+      <div>
+        <div class="relative">
+          <img src="${coverImage}" class="w-full aspect-square object-cover rounded-lg mb-1">
+          <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[8px] px-1 rounded font-medium"><i class="fa-solid fa-images"></i> ${p.images ? p.images.length : 1}</span>
+        </div>
+        <h5 class="text-[11px] font-semibold text-gray-800 line-clamp-1">${p.name}</h5>
+      </div>
+      <span class="text-brand-red font-extrabold text-xs mt-1">KSh ${p.price.toLocaleString()}</span>`;
+    grid.appendChild(card);
+  });
+}
+
+function openProductDetailById(id) {
+  const p = productsDatabase.find(item => item.id === id);
+  if (p) openProductDetail(p);
+}
+
+function openProductDetail(product) {
+  activeDetailProduct = product;
+  detailQty = 1;
+  document.getElementById('detailQtyDisplay').innerText = detailQty;
+  document.getElementById('detailCategoryBadge').innerText = product.category;
+
+  const imgList = product.images && product.images.length > 0 ? product.images : [product.image];
+  document.getElementById('detailProductImage').src = imgList[0];
+
+  const thumbsContainer = document.getElementById('detailImageThumbnails');
+  thumbsContainer.innerHTML = '';
+  imgList.forEach((imgUrl, i) => {
+    const thumb = document.createElement('img');
+    thumb.src = imgUrl;
+    thumb.className = `w-14 h-14 rounded-xl object-cover cursor-pointer border-2 transition-all ${i === 0 ? 'border-brand-red scale-95 shadow-sm' : 'border-transparent opacity-70 hover:opacity-100'}`;
+    thumb.onclick = () => {
+      document.getElementById('detailProductImage').src = imgUrl;
+      document.querySelectorAll('#detailImageThumbnails img').forEach(t => {
+        t.className = 'w-14 h-14 rounded-xl object-cover cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100 transition-all';
+      });
+      thumb.className = 'w-14 h-14 rounded-xl object-cover cursor-pointer border-2 border-brand-red scale-95 shadow-sm transition-all';
+    };
+    thumbsContainer.appendChild(thumb);
+  });
+
+  document.getElementById('detailProductTitle').innerText = product.name;
+  document.getElementById('detailProductPrice').innerText = `KSh ${product.price.toLocaleString()}`;
+  document.getElementById('detailProductOldPrice').innerText = `KSh ${product.oldPrice.toLocaleString()}`;
+  document.getElementById('detailProductRating').innerText = product.rating;
+  document.getElementById('detailProductReviews').innerText = `${product.reviews} Verified Reviews`;
+  document.getElementById('detailProductDescription').innerText = product.description;
+  document.getElementById('detailDiscountBadge').innerText = `${Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}% OFF`;
+  document.getElementById('productDetailModal').classList.remove('hidden');
+}
+
+function closeProductDetailModal() { document.getElementById('productDetailModal').classList.add('hidden'); }
+
+function adjustDetailQty(amount) {
+  detailQty = Math.max(1, detailQty + amount);
+  document.getElementById('detailQtyDisplay').innerText = detailQty;
+}
+
+function addCurrentDetailToCart() {
+  if (activeDetailProduct) {
+    addToCart(activeDetailProduct, detailQty);
+    closeProductDetailModal();
+    openAlertModal(`🛒 Added ${detailQty}x "${activeDetailProduct.name}" to your cart!`);
+  }
+}
+
+function buyCurrentDetailNow() {
+  if (activeDetailProduct) {
+    addToCart(activeDetailProduct, detailQty);
+    closeProductDetailModal();
+    switchTab('cart');
+  }
+}
+
+function addToCartById(id) {
+  const p = productsDatabase.find(item => item.id === id);
+  if (p) { addToCart(p, 1); openAlertModal(`🛒 Added "${p.name}" to your cart!`); }
+}
+
+function addToCart(product, qty = 1) {
+  const coverImage = product.images && product.images.length > 0 ? product.images[0] : product.image;
+  const existing = shoppingCart.find(item => item.id === product.id);
+  if (existing) existing.qty += qty;
+  else shoppingCart.push({ id: product.id, name: product.name, price: product.price, image: coverImage, qty: qty });
+  updateCartUI();
+}
+
+function updateCartQty(id, delta) {
+  const item = shoppingCart.find(i => i.id === id);
+  if (item) {
+    item.qty += delta;
+    if (item.qty <= 0) shoppingCart = shoppingCart.filter(i => i.id !== id);
+  }
+  updateCartUI();
+}
+
+function clearCart() { shoppingCart = []; updateCartUI(); }
+
+function getCartTotals() {
+  const subtotal = shoppingCart.reduce((s, i) => s + i.price * i.qty, 0);
+  const shipping = subtotal > 0 ? 150 : 0;
+  const discount = subtotal > 3000 ? 300 : 0;
+  return { subtotal, shipping, discount, total: subtotal > 0 ? subtotal + shipping - discount : 0 };
+}
+
+function updateCartUI() {
+  const totalItemsCount = shoppingCart.reduce((acc, item) => acc + item.qty, 0);
+  const badge = document.getElementById('cartBadge');
+  document.getElementById('cartCountHeader').innerText = totalItemsCount;
+  if (totalItemsCount > 0) {
+    badge.innerText = totalItemsCount;
+    badge.classList.remove('hidden');
+    badge.classList.add('flex');
+  } else {
+    badge.classList.add('hidden');
+    badge.classList.remove('flex');
+  }
+
+  const cartList = document.getElementById('cartPageList');
+  cartList.innerHTML = '';
+
+  if (shoppingCart.length === 0) {
+    cartList.innerHTML = `
+      <div class="text-center py-12 space-y-2">
+        <i class="fa-solid fa-cart-flatbed text-4xl text-gray-300"></i>
+        <p class="text-xs text-gray-500">Your shopping cart is empty.</p>
+        <button onclick="switchTab('home')" class="mt-2 bg-brand-red text-white text-xs px-4 py-2 rounded-xl font-bold">Start Shopping</button>
+      </div>`;
+  } else {
+    shoppingCart.forEach(item => {
+      const itemTotal = item.price * item.qty;
+      const row = document.createElement('div');
+      row.className = "py-3 flex items-center gap-3";
+      row.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl border border-gray-100 flex-shrink-0 bg-gray-50">
+        <div class="flex-1 min-w-0">
+          <h4 class="text-xs font-bold text-gray-800 truncate">${item.name}</h4>
+          <span class="text-xs font-extrabold text-brand-red">KSh ${item.price.toLocaleString()}</span>
+          <div class="flex items-center gap-2 mt-2">
+            <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-white">
+              <button onclick="updateCartQty(${item.id}, -1)" class="px-2 py-0.5 bg-gray-100 text-gray-700 font-bold hover:bg-gray-200 text-xs">-</button>
+              <span class="px-2.5 text-xs font-bold">${item.qty}</span>
+              <button onclick="updateCartQty(${item.id}, 1)" class="px-2 py-0.5 bg-gray-100 text-gray-700 font-bold hover:bg-gray-200 text-xs">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="text-right flex flex-col justify-between items-end">
+          <span class="text-xs font-black text-gray-900">KSh ${itemTotal.toLocaleString()}</span>
+          <button onclick="updateCartQty(${item.id}, -${item.qty})" class="text-gray-400 hover:text-brand-red mt-3 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+        </div>`;
+      cartList.appendChild(row);
+    });
+  }
+
+  const t = getCartTotals();
+  document.getElementById('cartSubtotal').innerText = `KSh ${t.subtotal.toLocaleString()}`;
+  document.getElementById('cartDiscount').innerText = `- KSh ${t.discount.toLocaleString()}`;
+  document.getElementById('cartGrandTotal').innerText = `KSh ${t.total.toLocaleString()}`;
+}
+
+/* ---------- PAYMENTS (PayHero Lipwa) ---------- */
+// 0712345678 / 712345678 / +254712345678 -> 254712345678
+function normalizeKePhone(raw) {
+  let p = (raw || '').replace(/\D/g, '');
+  if (p.startsWith('0')) p = '254' + p.slice(1);
+  else if (p.length === 9 && /^[17]/.test(p)) p = '254' + p;
+  return /^254[17]\d{8}$/.test(p) ? p : null;
+}
+
+function processCheckoutOrder() {
+  if (shoppingCart.length === 0) {
+    openAlertModal("🛒 Your cart is empty! Please add items before checking out.");
+    return;
+  }
+  const phone = normalizeKePhone(document.getElementById('checkoutMpesaPhone').value);
+  if (!phone) {
+    openAlertModal("📲 Enter a valid M-Pesa number, e.g. 0712345678.");
+    return;
+  }
+
+  const { total } = getCartTotals();
+  const reference = 'KM' + Date.now();
+  const base = location.origin + location.pathname;
+
+  try { localStorage.setItem('km_cart', JSON.stringify(shoppingCart)); } catch (e) {}
+
+  const params = new URLSearchParams({
+    amount: total,
+    phone: phone,
+    reference: reference,
+    success_url: `${base}?payment=success&ref=${reference}`,
+    failed_url: `${base}?payment=failed`
+  });
+  window.location.href = `${LIPWA_LINK}?${params.toString()}`;
+}
+
+function handlePaymentReturn() {
+  const q = new URLSearchParams(location.search);
+  const status = q.get('payment');
+  if (!status) return;
+  const ref = q.get('ref') || '';
+  history.replaceState({}, '', location.pathname);
+
+  if (status === 'success') {
+    try { localStorage.removeItem('km_cart'); } catch (e) {}
+    openAlertModal(`✅ Payment received! Order ${ref} is being processed.`);
+  } else {
+    try {
+      const saved = JSON.parse(localStorage.getItem('km_cart') || '[]');
+      if (Array.isArray(saved)) shoppingCart = saved;
+    } catch (e) {}
+    updateCartUI();
+    switchTab('cart');
+    openAlertModal("❌ Payment failed or was cancelled. Your cart is saved, try again.");
+  }
+}
+
+/* ---------- CHAT / MODALS ---------- */
+function openChatRoom(roomTitle) {
+  document.getElementById('chatRoomTitle').innerText = roomTitle;
+  document.getElementById('chatModal').classList.remove('hidden');
+}
+function closeChatRoom() { document.getElementById('chatModal').classList.add('hidden'); }
+
+function sendChatMessage() {
+  const input = document.getElementById('chatInputText');
+  const text = input.value.trim();
+  if (!text) return;
+  const safe = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const box = document.getElementById('chatMessagesBox');
+
+  const userBubble = document.createElement('div');
+  userBubble.className = "flex items-start justify-end gap-2";
+  userBubble.innerHTML = `<div class="bg-brand-red text-white p-2.5 rounded-2xl rounded-tr-none shadow-sm max-w-[80%]">${safe}</div>`;
+  box.appendChild(userBubble);
+  input.value = '';
+  box.scrollTop = box.scrollHeight;
+
+  setTimeout(() => {
+    const csBubble = document.createElement('div');
+    csBubble.className = "flex items-start gap-2";
+    csBubble.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-brand-red text-white flex items-center justify-center text-[10px] font-bold">CS</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none shadow-sm max-w-[80%] text-gray-700">Thank you for reaching out! A Kilimall representative is reviewing your inquiry about "${safe}".</div>`;
+    box.appendChild(csBubble);
+    box.scrollTop = box.scrollHeight;
+  }, 1000);
+}
+
+function claimDailyCheckIn() {
+  userKiliCoins += 50;
+  document.getElementById('accountCoins').innerText = userKiliCoins;
+  openAlertModal("🪙 Daily Check-in Success! +50 KiliCoins claimed!");
+}
+
+function openAlertModal(msg) {
+  document.getElementById('modalMessageText').innerText = msg;
+  document.getElementById('generalModal').classList.remove('hidden');
+}
+function closeAlertModal() { document.getElementById('generalModal').classList.add('hidden'); }
+</script>
+</body>
+</html>
