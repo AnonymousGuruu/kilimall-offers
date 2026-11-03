@@ -24,177 +24,56 @@ tailwind.config = {
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col justify-between select-none pb-16">
 
-<header id="mainHeader" class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
-  <div class="px-3 pt-3 pb-2 flex items-center gap-2">
-    <div class="relative flex-1 flex items-center border-2 border-brand-red rounded-lg overflow-hidden h-10 bg-white">
-      <input type="text" id="searchInput" placeholder="I am searching for..." class="w-full px-3 text-sm text-gray-700 focus:outline-none placeholder-gray-400" oninput="handleSearch(this.value)">
-      <button onclick="triggerSearch()" class="bg-brand-red text-white h-full px-4 flex items-center justify-center hover:bg-brand-darkRed transition-colors">
-        <i class="fa-solid fa-magnifying-glass text-lg"></i>
-      </button>
+<header id="mainHeader" class="sticky top-0 z-40 bg-black">
+  <div class="px-3 pt-3 pb-2">
+    <div class="flex items-center bg-white rounded-lg h-11 px-3 gap-3">
+      <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg"></i>
+      <input type="text" id="searchInput" placeholder="Black Friday Big Perks" class="flex-1 min-w-0 text-[15px] text-gray-700 bg-transparent focus:outline-none placeholder-gray-500" oninput="handleSearch(this.value)">
     </div>
   </div>
-  <div id="topCategoryNav" class="px-2 overflow-x-auto no-scrollbar flex items-center border-t border-gray-50 text-sm font-medium text-gray-600 space-x-6 whitespace-nowrap">
-    <button onclick="filterCategory('ALL')" class="category-nav-btn py-2.5 px-1 border-b-2 border-brand-red text-brand-red font-bold transition-all" data-cat="ALL">ALL</button>
-    <button onclick="filterCategory('TVs')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="TVs">TVs</button>
-    <button onclick="filterCategory('Appliances')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Appliances">Appliances</button>
-    <button onclick="filterCategory('Kitchen')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Kitchen">Kitchen</button>
-    <button onclick="filterCategory('Home')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Home">Home</button>
-    <button onclick="filterCategory('Phones')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Phones">Phones</button>
-    <button onclick="filterCategory('Fashion')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Fashion">Fashion</button>
-    <button onclick="filterCategory('Beauty')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Beauty">Beauty</button>
-    <button onclick="filterCategory('Shoes')" class="category-nav-btn py-2.5 px-1 border-b-2 border-transparent hover:text-brand-red transition-all" data-cat="Shoes">Shoes</button>
+  <div class="flex items-center">
+    <div id="topCategoryNav" class="flex-1 px-3 overflow-x-auto no-scrollbar flex items-center text-[15px] space-x-6 whitespace-nowrap"></div>
+    <button class="px-3 text-white"><i class="fa-solid fa-chevron-down"></i></button>
   </div>
 </header>
 
 <main class="max-w-lg mx-auto w-full flex-1 space-y-3 pb-6">
 
   <!-- HOME -->
-  <div id="view-home" class="space-y-3">
-    <div class="p-2">
-      <div class="relative w-full h-44 rounded-2xl overflow-hidden shadow-sm bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-        <div id="carouselSlides" class="relative w-full h-full flex transition-transform duration-500 ease-out">
-          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-slate-100 to-slate-200 text-gray-900">
-            <div class="z-10 max-w-[55%]">
-              <span class="bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">New Arrival</span>
-              <h2 class="text-xl font-extrabold mt-1 tracking-tight">WATCH <span class="text-xs font-normal block text-gray-500">SERIES 12</span></h2>
-              <p class="text-[11px] text-gray-600 mt-0.5 line-clamp-1">Your Watch, Now with Intelligence</p>
-              <button onclick="openProductDetailById(201)" class="mt-3 px-3 py-1 border border-black rounded-full text-xs font-bold hover:bg-black hover:text-white transition-all shadow-sm">Live Sale</button>
-            </div>
-            <div class="relative w-36 h-36 flex items-center justify-center">
-              <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&auto=format&fit=crop&q=80" alt="Watch Series 12" class="object-contain h-32 drop-shadow-lg">
-            </div>
-          </div>
-          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-red-600 to-amber-500 text-white">
-            <div class="z-10 max-w-[55%]">
-              <span class="bg-yellow-300 text-red-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Super Deal</span>
-              <h2 class="text-xl font-extrabold mt-1">SMART TV 43"</h2>
-              <p class="text-xs text-red-100 mt-0.5">Full HD Android Display</p>
-              <button onclick="openProductDetailById(102)" class="mt-3 px-3 py-1 bg-white text-red-600 rounded-full text-xs font-bold shadow-md hover:bg-gray-100 transition-all">Shop KSh 21,999</button>
-            </div>
-            <div class="relative w-36 h-36 flex items-center justify-center">
-              <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?w=400&auto=format&fit=crop&q=80" alt="Smart TV" class="object-contain h-32 drop-shadow-lg rounded-lg">
-            </div>
-          </div>
-          <div class="w-full h-full flex-shrink-0 relative flex items-center justify-between px-6 bg-gradient-to-r from-blue-600 to-indigo-800 text-white">
-            <div class="z-10 max-w-[55%]">
-              <span class="bg-blue-300 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Kitchen Fiesta</span>
-              <h2 class="text-xl font-extrabold mt-1">Air Fryer 6L</h2>
-              <p class="text-xs text-blue-100 mt-0.5">Healthy Cooking Made Easy</p>
-              <button onclick="openProductDetailById(103)" class="mt-3 px-3 py-1 bg-white text-blue-700 rounded-full text-xs font-bold shadow-md hover:bg-gray-100 transition-all">Claim Voucher</button>
-            </div>
-            <div class="relative w-36 h-36 flex items-center justify-center">
-              <img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=400&auto=format&fit=crop&q=80" alt="Air Fryer" class="object-contain h-32 drop-shadow-lg rounded-lg">
-            </div>
-          </div>
+  <div id="view-home" class="space-y-2">
+    <span id="activeFilterBadge" class="hidden"></span>
+    <div class="px-2 pt-2"><div class="bg-white rounded-xl py-3 px-1">
+      <div class="flex"><button onclick="claimDailyCheckIn()" class="flex flex-col items-center gap-1 w-1/5"><div class="relative w-12 h-12 flex items-center justify-center"><div class="w-12 h-12 rounded-full bg-gradient-to-b from-amber-300 to-orange-500 text-white font-extrabold text-2xl flex items-center justify-center shadow">C</div></div><span class="text-[12px] leading-tight text-gray-700 text-center">Claim Daily Coins</span></button><button onclick="openAlertModal('🎮 Match &amp; Win: match the animals to win up to KSh200!')" class="flex flex-col items-center gap-1 w-1/5"><div class="relative w-12 h-12 flex items-center justify-center"><div class="w-12 h-12 rounded-lg bg-amber-100 grid grid-cols-2 text-[15px] place-items-center p-1"><span>🦁</span><span>🐘</span><span>🐯</span><span>🐼</span></div></div><span class="text-[12px] leading-tight text-gray-700 text-center">Match &amp; Win KSh200</span></button><button onclick="filterCategory('ALL')" class="flex flex-col items-center gap-1 w-1/5"><div class="relative w-12 h-12 flex items-center justify-center"><div class="font-black text-[11px] leading-none text-center text-black border-2 border-black rounded px-1 py-1">BLACK<br>FRIDAY</div></div><span class="text-[12px] leading-tight text-gray-700 text-center">Super Offers</span></button><button onclick="openAlertModal('🎡 Lucky Spin! You won 100 KiliCoins + KSh 300 Shopping Coupon!')" class="flex flex-col items-center gap-1 w-1/5"><div class="relative w-12 h-12 flex items-center justify-center"><i class="fa-solid fa-dharmachakra text-5xl text-red-500"></i><span class="absolute bottom-0 bg-red-500 text-white text-[8px] font-bold px-1.5 rounded-full">Free</span></div><span class="text-[12px] leading-tight text-gray-700 text-center">Spin &amp; Win KSh 1M</span></button><button onclick="openAlertModal('📶 Top-Up Data &amp; Airtime: 10% off today!')" class="flex flex-col items-center gap-1 w-1/5"><div class="relative w-12 h-12 flex items-center justify-center"><div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 text-white font-extrabold text-xl flex items-center justify-center">S</div><span class="absolute bottom-0 bg-red-500 text-white text-[8px] font-bold px-1 rounded-full">10% OFF</span></div><span class="text-[12px] leading-tight text-gray-700 text-center">Top-Up Data &amp; Airtime</span></button></div>
+      <div class="flex justify-center gap-1 mt-2"><span class="w-6 h-1 rounded bg-red-500"></span><span class="w-6 h-1 rounded bg-gray-300"></span></div>
+    </div></div>
+
+    <div class="px-2">
+      <div class="bg-[#ff4a0f] rounded-xl overflow-hidden">
+        <div class="flex items-center justify-between px-3 pt-3">
+          <h2 class="text-white font-black italic text-[26px] leading-none tracking-tight">Unbeatable Deals</h2>
+          <div class="bg-gradient-to-r from-lime-300 to-yellow-300 rounded-lg px-2.5 py-1 text-center leading-tight"><div class="font-black text-lg text-gray-900">Black Friday</div><div class="text-[11px] text-gray-800">Oct. 30-Nov. 30</div></div>
         </div>
-        <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5 z-20">
-          <button onclick="setCarouselSlide(0)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-100 transition-opacity"></button>
-          <button onclick="setCarouselSlide(1)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-40 transition-opacity"></button>
-          <button onclick="setCarouselSlide(2)" class="carousel-dot w-2 h-2 rounded-full bg-white opacity-40 transition-opacity"></button>
-        </div>
+        <div class="grid grid-cols-3 gap-2 p-2 pt-3"><div onclick="filterCategory('Phones')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">Phones &amp; ACCs &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 20,999</div></div><div onclick="filterCategory('TVs')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1571415060716-baff5f7179e6?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">TV &amp; Audio Sale &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 3,199</div></div><div onclick="filterCategory('Fashion')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">Men's Fashion &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 688</div></div><div onclick="filterCategory('Appliances')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><span class="absolute top-1 right-1 z-10 bg-red-600 text-white text-[10px] font-bold px-1.5 rounded">35% OFF</span><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">Appliances Sale &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 19,399</div></div><div onclick="filterCategory('Home')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">Home Sale &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 3,899</div></div><div onclick="filterCategory('Fashion')" class="bg-white rounded-lg p-1.5 cursor-pointer relative"><div class="h-24 bg-gray-50 rounded flex items-center justify-center overflow-hidden"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=300&auto=format&fit=crop&q=80" class="h-full w-full object-contain"></div><div class="mt-1 bg-yellow-300 text-[11px] font-semibold text-gray-800 rounded px-1 py-0.5 text-center truncate">Women's Fashion &gt;</div><div class="text-center font-extrabold text-red-700 text-[17px] mt-0.5"><i class="fa-solid fa-fire text-red-500 text-sm"></i>KSh 899</div></div></div>
       </div>
     </div>
 
     <div class="px-2">
-      <div class="bg-white rounded-2xl p-3 shadow-sm grid grid-cols-5 gap-y-4 gap-x-1 text-center text-xs">
-        <button onclick="openAlertModal('🎁 New User Voucher! KSh 1,329 voucher added to your account!')" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-red-500 to-pink-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-gift text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">KSh 1329 for New User</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('Phones');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-400 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-mobile-screen-button text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Phones</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('Kitchen');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-kitchen-set text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Kitchen</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('Appliances');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-500 to-indigo-400 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-blender text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Appliances</span>
-        </button>
-        <button onclick="openAlertModal('🎡 Lucky Spin! You won 100 KiliCoins + KSh 300 Shopping Coupon!')" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-400 to-red-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform relative overflow-hidden">
-            <i class="fa-solid fa-dharmachakra text-xl animate-spin" style="animation-duration: 8s;"></i>
-            <span class="absolute top-0 right-0 bg-yellow-300 text-red-800 text-[8px] font-extrabold px-1 rounded-bl">Free</span>
+      <div class="bg-white rounded-xl p-3">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-[26px] font-extrabold tracking-tight text-gray-900 flex items-center">F<i class="fa-solid fa-bolt text-red-600 mx-0.5"></i>ash Sale</h2>
+          <div class="flex items-center gap-1 text-sm font-semibold">
+            <span class="text-gray-400 font-normal mr-1">Ends in</span>
+            <span id="timerHours" class="bg-red-600 text-white px-1.5 py-0.5 rounded font-mono">00</span><span class="text-gray-500">:</span>
+            <span id="timerMinutes" class="bg-red-600 text-white px-1.5 py-0.5 rounded font-mono">55</span><span class="text-gray-500">:</span>
+            <span id="timerSeconds" class="bg-red-600 text-white px-1.5 py-0.5 rounded font-mono">39</span>
+            <i class="fa-solid fa-chevron-right text-gray-400 ml-2"></i>
           </div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">WIN KSh 130K</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('TVs');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-tv text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">TVs</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('Beauty');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-pink-400 to-rose-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-pump-soap text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Health & Beauty</span>
-        </button>
-        <button onclick="switchTab('categories'); selectCategoryTab('Shoes');" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-orange-400 to-amber-500 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform"><i class="fa-solid fa-shoe-prints text-xl"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Shoes</span>
-        </button>
-        <button onclick="claimDailyCheckIn()" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-300 to-yellow-500 text-yellow-950 flex items-center justify-center shadow-md group-active:scale-95 transition-transform font-bold text-lg"><i class="fa-solid fa-coins"></i></div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Check-in</span>
-        </button>
-        <button onclick="openAlertModal('💰 Pay 1 Bob Deal: Enter your M-Pesa phone number at checkout to receive 5 Bob cash return!')" class="flex flex-col items-center gap-1.5 group">
-          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-600 text-white flex items-center justify-center shadow-md group-active:scale-95 transition-transform relative">
-            <i class="fa-solid fa-hand-holding-dollar text-xl"></i>
-            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] font-bold px-1 rounded-full">10% OFF</span>
-          </div>
-          <span class="text-[11px] font-medium leading-tight text-gray-700">Pay 1 Bob</span>
-        </button>
+        </div>
+        <div class="grid grid-cols-4 gap-2"><div onclick="openProductDetailById(301)" class="cursor-pointer"><div class="relative bg-gray-50 rounded-lg aspect-square overflow-hidden"><span class="absolute top-1 left-1 z-10 w-6 h-6 rounded-full bg-sky-600 text-white text-[9px] font-bold flex items-center justify-center">EM</span><img src="https://images.unsplash.com/photo-1571415060716-baff5f7179e6?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-contain"></div><div class="text-center text-red-600 font-semibold text-[17px] mt-1">KSh 2,999</div></div><div onclick="openProductDetailById(302)" class="cursor-pointer"><div class="relative bg-gray-50 rounded-lg aspect-square overflow-hidden"><span class="absolute top-1 left-1 z-10 w-6 h-6 rounded-full bg-sky-600 text-white text-[9px] font-bold flex items-center justify-center">EM</span><img src="https://images.unsplash.com/photo-1585515320310-259814833e62?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-contain"></div><div class="text-center text-red-600 font-semibold text-[17px] mt-1">KSh 3,699</div></div><div onclick="openProductDetailById(303)" class="cursor-pointer"><div class="relative bg-gray-50 rounded-lg aspect-square overflow-hidden"><span class="absolute top-1 left-1 z-10 w-6 h-6 rounded-full bg-sky-600 text-white text-[9px] font-bold flex items-center justify-center">EM</span><img src="https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-contain"></div><div class="text-center text-red-600 font-semibold text-[17px] mt-1">KSh 1,899</div></div><div onclick="openProductDetailById(304)" class="cursor-pointer"><div class="relative bg-gray-50 rounded-lg aspect-square overflow-hidden"><span class="absolute top-1 left-1 z-10 w-6 h-6 rounded-full bg-sky-600 text-white text-[9px] font-bold flex items-center justify-center">EM</span><img src="https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-contain"></div><div class="text-center text-red-600 font-semibold text-[17px] mt-1">KSh 589</div></div></div>
       </div>
     </div>
 
-    <div class="px-2">
-      <div class="bg-white rounded-2xl p-3 shadow-sm">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="text-xl font-extrabold italic tracking-tight text-gray-900 flex items-center">F<i class="fa-solid fa-bolt text-brand-red animate-pulse-fast mx-0.5"></i>ash Sale</h2>
-          <div class="flex items-center gap-1 text-xs font-bold">
-            <span class="text-gray-500 font-normal mr-1">Ends in</span>
-            <span id="timerHours" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">01</span><span>:</span>
-            <span id="timerMinutes" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">23</span><span>:</span>
-            <span id="timerSeconds" class="bg-gray-800 text-white px-1.5 py-0.5 rounded text-xs font-mono">45</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-4 gap-2 overflow-x-auto no-scrollbar">
-          <div onclick="openProductDetailById(202)" class="cursor-pointer group">
-            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5"><img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300&auto=format&fit=crop&q=80" alt="Flash Item 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform"></div>
-            <div class="text-brand-red font-extrabold text-sm text-center">KSh 99</div>
-            <div class="text-[10px] text-gray-400 line-through text-center">KSh 1,200</div>
-          </div>
-          <div onclick="openProductDetailById(203)" class="cursor-pointer group">
-            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=300&auto=format&fit=crop&q=80" alt="Flash Item 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform"></div>
-            <div class="text-brand-red font-extrabold text-sm text-center">KSh 99</div>
-            <div class="text-[10px] text-gray-400 line-through text-center">KSh 850</div>
-          </div>
-          <div onclick="openProductDetailById(201)" class="cursor-pointer group">
-            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5">
-              <span class="absolute top-1 left-1 bg-brand-red text-white text-[8px] font-bold px-1 rounded z-10">JQSEN</span>
-              <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=300&auto=format&fit=crop&q=80" alt="Flash Item 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
-            </div>
-            <div class="text-brand-red font-extrabold text-sm text-center">KSh 1,849</div>
-            <div class="text-[10px] text-gray-400 line-through text-center">KSh 4,500</div>
-          </div>
-          <div onclick="openProductDetailById(106)" class="cursor-pointer group">
-            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100 mb-1.5">
-              <span class="absolute bottom-1 left-0 right-0 bg-black/70 text-white text-[8px] text-center font-bold py-0.5 z-10">MAYBELLINE</span>
-              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300&auto=format&fit=crop&q=80" alt="Flash Item 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
-            </div>
-            <div class="text-brand-red font-extrabold text-sm text-center">KSh 2,179</div>
-            <div class="text-[10px] text-gray-400 line-through text-center">KSh 3,200</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="px-2 pt-1">
-      <div class="flex items-center justify-between mb-2.5 px-1">
-        <h3 class="text-lg font-bold text-gray-900">What's New</h3>
-        <span id="activeFilterBadge" class="text-xs bg-red-100 text-brand-red font-semibold px-2 py-0.5 rounded-full">Showing: All Items</span>
-      </div>
-      <div id="productGrid" class="grid grid-cols-2 gap-2"></div>
-    </div>
+    <div class="px-2"><div id="productGrid" class="grid grid-cols-2 gap-2"></div></div>
   </div>
 
   <!-- CATEGORIES -->
@@ -322,21 +201,10 @@ tailwind.config = {
   </div>
 </main>
 
-<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 max-w-lg mx-auto shadow-lg">
-  <div class="grid grid-cols-5 h-14 text-center">
-    <button onclick="switchTab('home')" id="nav-home" class="nav-item flex flex-col items-center justify-center text-brand-red font-medium"><i class="fa-solid fa-house text-lg"></i><span class="text-[10px] mt-0.5">Home</span></button>
-    <button onclick="switchTab('categories')" id="nav-categories" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red"><i class="fa-solid fa-list text-lg"></i><span class="text-[10px] mt-0.5">Categories</span></button>
-    <button onclick="switchTab('message')" id="nav-message" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red relative">
-      <div class="relative"><i class="fa-regular fa-comment-dots text-lg"></i><span class="absolute -top-1 -right-2 bg-brand-red text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span></div>
-      <span class="text-[10px] mt-0.5">Message</span>
-    </button>
-    <button onclick="switchTab('cart')" id="nav-cart" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-brand-red relative">
-      <div class="relative"><i class="fa-solid fa-cart-shopping text-lg"></i><span id="cartBadge" class="hidden absolute -top-1.5 -right-2 bg-brand-red text-white text-[10px] w-4 h-4 rounded-full items-center justify-center font-bold">0</span></div>
-      <span class="text-[10px] mt-0.5">Cart</span>
-    </button>
-    <button onclick="switchTab('account')" id="nav-account" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium hover:text-gray-900"><i class="fa-regular fa-user text-lg"></i><span class="text-[10px] mt-0.5">Account</span></button>
-  </div>
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 max-w-lg mx-auto">
+  <div class="grid grid-cols-5 h-16 text-center"><button onclick="switchTab('home')" id="nav-home" class="nav-item flex flex-col items-center justify-center text-brand-red font-medium relative"><div class="w-9 h-9 rounded-lg bg-brand-red text-white font-extrabold text-xl flex items-center justify-center">K</div><span class="text-[12px] mt-0.5">Home</span></button><button onclick="switchTab('categories')" id="nav-categories" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium relative"><i class="fa-solid fa-table-cells-large text-2xl"></i><span class="text-[12px] mt-0.5">Category</span></button><button onclick="switchTab('message')" id="nav-message" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium relative"><i class="fa-regular fa-comment-dots text-2xl"></i><span class="text-[12px] mt-0.5">Message</span></button><button onclick="switchTab('cart')" id="nav-cart" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium relative"><div class="relative"><i class="fa-solid fa-cart-shopping text-2xl"></i><span id="cartBadge" class="hidden absolute -top-2 -right-3 bg-brand-red text-white text-[10px] w-4 h-4 rounded-full items-center justify-center font-bold">0</span></div><span class="text-[12px] mt-0.5">Cart</span></button><button onclick="switchTab('account')" id="nav-account" class="nav-item flex flex-col items-center justify-center text-gray-500 font-medium relative"><i class="fa-regular fa-user text-2xl"></i><span class="text-[12px] mt-0.5">Account</span></button></div>
 </nav>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="hidden fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-black/60 text-white text-[11px] flex-col items-center justify-center"><i class="fa-solid fa-arrow-up-long"></i>TOP</button>
 
 <!-- PRODUCT DETAIL MODAL -->
 <div id="productDetailModal" class="fixed inset-0 bg-black/70 z-50 hidden flex justify-end flex-col backdrop-blur-sm transition-opacity">
@@ -476,7 +344,17 @@ const productsDatabase = [
     description: "Stylish analog wrist watch with stainless steel case and water-resistant build. Limited flash-sale stock." },
   { id: 203, name: "Wireless Bluetooth Headphones (Flash Deal)", category: "Phones", price: 99, oldPrice: 850, rating: 4.4, reviews: 77,
     images: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&auto=format&fit=crop&q=80"],
-    description: "Wireless Bluetooth headphones with deep bass and long battery life. Limited flash-sale stock." }
+    description: "Wireless Bluetooth headphones with deep bass and long battery life. Limited flash-sale stock." },
+  { id: 301, name: "Soundbar with Subwoofer, 1 Year Warranty", category: "TVs", price: 2999, oldPrice: 4500, rating: 4.6, reviews: 212, images: ["https://images.unsplash.com/photo-1571415060716-baff5f7179e6?w=600&auto=format&fit=crop&q=80"], description: "Home theatre soundbar with wireless subwoofer, Bluetooth and remote." },
+  { id: 302, name: "20L 1500W Electric Oven, 1 Year Warranty", category: "Appliances", price: 3699, oldPrice: 5200, rating: 4.7, reviews: 164, images: ["https://images.unsplash.com/photo-1585515320310-259814833e62?w=600&auto=format&fit=crop&q=80"], description: "20 litre electric oven with 1500W power, timer and adjustable temperature." },
+  { id: 303, name: "Heavy Duty Double Jar Blender, 1 Year Warranty", category: "Kitchen", price: 1899, oldPrice: 2800, rating: 4.5, reviews: 131, images: ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=600&auto=format&fit=crop&q=80"], description: "High-speed blender with two jars for blending and grinding." },
+  { id: 304, name: "Non-Stick Dry Iron Box, 1 Year Warranty", category: "Appliances", price: 589, oldPrice: 950, rating: 4.4, reviews: 340, images: ["https://images.unsplash.com/photo-1489274495757-95c7c837b101?w=600&auto=format&fit=crop&q=80"], description: "Lightweight dry iron with non-stick soleplate and adjustable heat." },
+  { id: 305, name: "6-Piece Stainless Steel Cooking Pot Set", category: "Home", price: 3899, oldPrice: 5500, rating: 4.6, reviews: 98, images: ["https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop&q=80"], description: "Durable stainless steel cookware set with lids." },
+  { id: 306, name: "Double Door Refrigerator, 35% OFF", category: "Appliances", price: 19399, oldPrice: 29999, rating: 4.8, reviews: 76, images: ["https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&auto=format&fit=crop&q=80"], description: "Energy-saving double door fridge with ample storage." },
+  { id: 307, name: "itel A300C 6000mAh 18W 90Hz 6.6\"", category: "Phones", price: 8999, oldPrice: 10999, rating: 4.5, reviews: 420, images: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80"], description: "Built to last longer with a 6000mAh battery, 18W charging and a 90Hz 6.6 inch display." },
+  { id: 308, name: "TIMACK X55 Sleeping Earbuds Wireless Mini", category: "Phones", price: 399, oldPrice: 1999, rating: 5, reviews: 1694, images: ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80"], description: "Ultra-light Bluetooth 5.3 sleep earbuds with long battery life and sweat resistance." },
+  { id: 309, name: "Air Pro3 MAX TWS Macaron Color inpods13", category: "Phones", price: 699, oldPrice: 1500, rating: 4.3, reviews: 860, images: ["https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&auto=format&fit=crop&q=80"], description: "Wireless earbuds in macaron colours with charging case." },
+  { id: 310, name: "The latest hot selling P9 Wireless Headphones", category: "Phones", price: 1299, oldPrice: 2500, rating: 4.4, reviews: 540, images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80"], description: "Over-ear Bluetooth headphones with deep bass." }
 ];
 
 let shoppingCart = [];
@@ -489,11 +367,33 @@ let userKiliCoins = 350;
 window.onload = function() {
   renderProducts(productsDatabase);
   populateCategorySidebar();
-  startCarouselTimer();
+  buildTopNav();
   startFlashSaleTimer();
   updateCartUI();
   handlePaymentReturn();
 };
+
+const NAV_ACTIVE = 'category-nav-btn pb-2 pt-1 border-b-2 border-white text-white font-semibold';
+const NAV_IDLE = 'category-nav-btn pb-2 pt-1 border-b-2 border-transparent text-gray-400';
+function buildTopNav() {
+  const nav = document.getElementById('topCategoryNav');
+  [['Hot','ALL'],['TVs','TVs'],['Appliances','Appliances'],['Kitchen','Kitchen'],['Home','Home'],['Phones','Phones'],['Fashion','Fashion'],['Beauty','Beauty'],['Shoes','Shoes']].forEach(([label, cat]) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.dataset.cat = cat;
+    b.className = cat === 'ALL' ? NAV_ACTIVE : NAV_IDLE;
+    b.onclick = () => filterCategory(cat);
+    nav.appendChild(b);
+  });
+}
+window.addEventListener('scroll', () => {
+  const t = document.getElementById('topBtn');
+  if (!t) return;
+  const show = window.scrollY > 500;
+  t.classList.toggle('hidden', !show);
+  t.classList.toggle('flex', show);
+});
+document.addEventListener('error', e => { if (e.target.tagName === 'IMG') e.target.style.visibility = 'hidden'; }, true);
 
 function setCarouselSlide(index) {
   currentCarouselIndex = index;
@@ -509,7 +409,7 @@ function startCarouselTimer() {
 }
 
 function startFlashSaleTimer() {
-  let totalSeconds = 1 * 3600 + 23 * 60 + 45;
+  let totalSeconds = 55 * 60 + 39;
   setInterval(() => {
     if (totalSeconds <= 0) totalSeconds = 24 * 3600;
     totalSeconds--;
@@ -543,8 +443,8 @@ function filterCategory(category) {
   activeCategory = category;
   document.querySelectorAll('.category-nav-btn').forEach(btn => {
     btn.className = btn.getAttribute('data-cat') === category
-      ? 'category-nav-btn py-2.5 px-1 border-b-2 border-brand-red text-brand-red font-bold transition-all'
-      : 'category-nav-btn py-2.5 px-1 border-b-2 border-transparent text-gray-600 hover:text-brand-red transition-all';
+      ? NAV_ACTIVE
+      : NAV_IDLE;
   });
   document.getElementById('activeFilterBadge').innerText = category === 'ALL' ? 'Showing: All Items' : `Showing: ${category}`;
   renderProducts(category === 'ALL' ? productsDatabase : productsDatabase.filter(p => p.category.toLowerCase() === category.toLowerCase()));
@@ -569,23 +469,15 @@ function renderProducts(products) {
   }
   products.forEach(item => {
     const card = document.createElement('div');
-    card.className = "bg-white rounded-2xl p-2.5 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative border border-gray-50 cursor-pointer";
+    card.className = 'bg-white rounded-lg overflow-hidden cursor-pointer';
     card.onclick = () => openProductDetail(item);
-    const coverImage = item.images && item.images.length > 0 ? item.images[0] : "https://placehold.co/300x300/f5f5f7/333?text=Item";
-    card.innerHTML = `
-      <div>
-        <div class="relative aspect-square rounded-xl overflow-hidden bg-gray-100 mb-2">
-          <img src="${coverImage}" alt="${item.name}" class="w-full h-full object-cover">
-          <span class="absolute top-1.5 right-1.5 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded-full font-bold flex items-center gap-1"><i class="fa-solid fa-images text-[8px]"></i> ${item.images ? item.images.length : 1}</span>
-          <button onclick="event.stopPropagation(); addToCartById(${item.id})" class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-brand-red text-white flex items-center justify-center shadow-lg active:scale-90 transition-transform"><i class="fa-solid fa-plus text-xs"></i></button>
-        </div>
-        <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">${item.category}</span>
-        <h4 class="text-xs font-medium text-gray-800 mt-1 line-clamp-2 leading-snug">${item.name}</h4>
-      </div>
-      <div class="mt-2">
-        <div class="flex items-center gap-1 text-[10px] text-amber-500 mb-0.5"><i class="fa-solid fa-star"></i><span class="font-bold text-gray-700">${item.rating}</span><span class="text-gray-400">(${item.reviews})</span></div>
-        <div class="flex items-baseline gap-1"><span class="text-brand-red font-extrabold text-sm">KSh ${item.price.toLocaleString()}</span><span class="text-[10px] text-gray-400 line-through">KSh ${item.oldPrice.toLocaleString()}</span></div>
-      </div>`;
+    const img = item.images && item.images[0] ? item.images[0] : '';
+    const stars = '<i class="fa-solid fa-star"></i>'.repeat(Math.round(item.rating));
+    card.innerHTML = `<img src="${img}" alt="${item.name}" class="w-full aspect-square object-cover bg-gray-100">
+      <div class="p-2"><h4 class="text-[15px] text-gray-800 leading-snug line-clamp-2">${item.name}</h4>
+      <div class="text-xl font-extrabold text-black mt-1">KSh ${item.price.toLocaleString()}</div>
+      <div class="flex items-center gap-1.5 text-[11px] text-orange-500 mt-0.5"><span>${stars}</span><span class="text-gray-400">(${item.reviews})</span></div>
+      <div class="text-[13px] text-orange-500 mt-1"><i class="fa-solid fa-bolt"></i> Fulfilled By Kilimall</div></div>`;
     grid.appendChild(card);
   });
 }
